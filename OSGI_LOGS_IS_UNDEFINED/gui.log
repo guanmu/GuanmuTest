@@ -1,0 +1,16 @@
+2017-12-12 10:33:27 [main                               ] DEBUG 45 passByValueTest o.g.test.PassByReferenceTest - passByValueTest:100 
+2017-12-12 10:33:27 [main                               ] DEBUG 25 main o.g.test.PassByReferenceTest - main:99 
+2017-12-12 10:33:27 [main                               ] DEBUG 37 passByValueTest2 o.g.test.PassByReferenceTest - a is [100] 
+2017-12-12 10:33:27 [main                               ] DEBUG 38 passByValueTest2 o.g.test.PassByReferenceTest - b is [99] 
+2017-12-12 10:33:27 [main                               ] DEBUG 29 main o.g.test.PassByReferenceTest - main2:99 
+2017-12-12 10:33:45 [main                               ] DEBUG 45 passByValueTest o.g.test.PassByReferenceTest - a is [100] 
+2017-12-12 10:33:45 [main                               ] DEBUG 25 main o.g.test.PassByReferenceTest - main:99 
+2017-12-12 10:33:45 [main                               ] DEBUG 37 passByValueTest2 o.g.test.PassByReferenceTest - a is [100] 
+2017-12-12 10:33:45 [main                               ] DEBUG 38 passByValueTest2 o.g.test.PassByReferenceTest - b is [99] 
+2017-12-12 10:33:45 [main                               ] DEBUG 29 main o.g.test.PassByReferenceTest - main2:99 
+2017-12-12 10:34:37 [main                               ] DEBUG 48 passByValueTest o.g.test.PassByReferenceTest - a is [100] 
+2017-12-12 10:34:37 [main                               ] DEBUG 25 main o.g.test.PassByReferenceTest - main:99 
+2017-12-12 10:34:37 [main                               ] DEBUG 36 passByValueTest2 o.g.test.PassByReferenceTest - a is [99] 
+2017-12-12 10:34:37 [main                               ] DEBUG 40 passByValueTest2 o.g.test.PassByReferenceTest - a is [100] 
+2017-12-12 10:34:37 [main                               ] DEBUG 41 passByValueTest2 o.g.test.PassByReferenceTest - b is [99] 
+2017-12-12 10:34:37 [main                               ] DEBUG 29 main o.g.test.PassByReferenceTest - main2:99 
