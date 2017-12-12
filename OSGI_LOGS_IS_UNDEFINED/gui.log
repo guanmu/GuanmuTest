@@ -14,3 +14,6 @@
 2017-12-12 10:34:37 [main                               ] DEBUG 40 passByValueTest2 o.g.test.PassByReferenceTest - a is [100] 
 2017-12-12 10:34:37 [main                               ] DEBUG 41 passByValueTest2 o.g.test.PassByReferenceTest - b is [99] 
 2017-12-12 10:34:37 [main                               ] DEBUG 29 main o.g.test.PassByReferenceTest - main2:99 
+2017-12-12 10:56:57 [main                               ] INFO  32 trap1 o.g.test.IntSelfAdditionTest - a is [99] 
+2017-12-12 10:56:57 [main                               ] INFO  36 trap1 o.g.test.IntSelfAdditionTest - a is [99] 
+2017-12-12 10:56:57 [main                               ] INFO  40 trap1 o.g.test.IntSelfAdditionTest - a is [100] 
