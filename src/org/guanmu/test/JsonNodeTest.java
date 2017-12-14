@@ -4,6 +4,7 @@ package org.guanmu.test;
 import java.io.IOException;
 
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
@@ -23,12 +24,11 @@ public class JsonNodeTest {
 	
 	private static ObjectMapper mapper = new ObjectMapper();
 	
-	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
-		
-		ObjectNode objNode = mapper.createObjectNode();
+	private static ObjectNode objNode = mapper.createObjectNode();
+	private static ArrayNode lunList = mapper.createArrayNode();
+	
+	static {
 		objNode.put("name", "device");
-		
-		ArrayNode lunList = mapper.createArrayNode();
 		
 		for(int i = 0;i < 2;i++) {
 			String lunName = "lun" + i;
@@ -41,12 +41,28 @@ public class JsonNodeTest {
 			lunList.add(lunNode);
 		}
 		
-		String lunListStr = mapper.writeValueAsString(lunList);
-		System.out.println("lunListStr:" + lunListStr);
+		String lunListStr = null;
+		try {
+			lunListStr = mapper.writeValueAsString(lunList);
+			System.out.println("lunListStr:" + lunListStr);
+			objNode.put("lunList", lunList);
+			String objNodeStr = mapper.writeValueAsString(objNode);
+			System.out.println("objNodeStr1:" + objNodeStr);				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		objNode.put("lunList", lunList);
-		String objNodeStr = mapper.writeValueAsString(objNode);
-		System.out.println("objNodeStr1:" + objNodeStr);
+	}
+
+	
+	/**
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonGenerationException 
+	 * 
+	 */
+	private static void test1() throws JsonGenerationException, JsonMappingException, IOException {
+
 		
 		ArrayNode tmpLunList = (ArrayNode)objNode.path("lunList");
 		
@@ -58,6 +74,23 @@ public class JsonNodeTest {
 		tmpLunList.add(addLun);
 		
 		System.out.println("objNodeStr2:" + objNode);
+	}
+	
+	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
+		test1();
+		
+		test2();
+	}
+
+	/**
+	 * 使用convertValue转换后，会产生新的对象
+	 */
+	private static void test2() {
+		JsonNode fieldNode = objNode.path("lunList");
+		ArrayNode tmpLunList = (ArrayNode)fieldNode;
+		
+		ArrayNode convertLunList = mapper.convertValue(fieldNode, ArrayNode.class);
+		System.out.println(convertLunList == tmpLunList);
 		
 		
 	}
