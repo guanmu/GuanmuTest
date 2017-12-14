@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.0-alpha2.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.0-RC0.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-mapper.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
