@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 
@@ -28,6 +30,18 @@ public class JsonNodeTest {
 	private static ArrayNode lunList = mapper.createArrayNode();
 	
 	static {
+		mapper = new ObjectMapper();
+		//设置输出时包含属性的风格
+		mapper.setSerializationInclusion(Inclusion.ALWAYS);
+		//设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
+		mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//禁止使用int代表Enum的order()來反序列化Enum,非常危險
+		mapper.configure(DeserializationConfig.Feature.FAIL_ON_NUMBERS_FOR_ENUMS, true);		
+		
+		
+		JsonNode nullNode = null;
+		objNode.put("null", nullNode);
+		
 		objNode.put("name", "device");
 		
 		for(int i = 0;i < 2;i++) {
@@ -37,6 +51,8 @@ public class JsonNodeTest {
 			ObjectNode lunNode = mapper.createObjectNode();
 			lunNode.put("lunName", lunName);
 			lunNode.put("lunId", lunId);
+			
+			lunNode.put("null", nullNode);
 			
 			lunList.add(lunNode);
 		}
@@ -77,9 +93,49 @@ public class JsonNodeTest {
 	}
 	
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
-		test1();
+//		test1();
+//		
+//		test2();
+//		
+//		test3();
 		
-		test2();
+		test4();
+	}
+
+	/**
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonGenerationException 
+	 * 
+	 */
+	private static void test4() throws JsonGenerationException, JsonMappingException, IOException {
+		Test t = new Test();
+		t.setA("a");
+		
+		String testStr = mapper.writeValueAsString(t);
+		System.out.println(testStr);
+		
+		JsonNode tmpNode = mapper.convertValue(testStr, JsonNode.class);
+		
+		String tmpStr = mapper.writeValueAsString(tmpNode);
+		
+		System.out.println(tmpStr);
+	}
+
+	/**
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonGenerationException 
+	 * 
+	 */
+	private static void test3() throws JsonGenerationException, JsonMappingException, IOException {
+		JsonNode missNode = objNode.path("null");
+		
+		System.out.println("[" + missNode.asText() + "]");
+		
+		String nullStr = mapper.writeValueAsString(null);
+		System.out.println("[" + nullStr + "]");
+		
 	}
 
 	/**
@@ -92,7 +148,7 @@ public class JsonNodeTest {
 		ArrayNode convertLunList = mapper.convertValue(fieldNode, ArrayNode.class);
 		System.out.println(convertLunList == tmpLunList);
 		
-		
+		System.out.println(convertLunList.equals(tmpLunList));
 	}
 	
 }
