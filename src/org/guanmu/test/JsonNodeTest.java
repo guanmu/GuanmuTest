@@ -99,7 +99,22 @@ public class JsonNodeTest {
 //		
 //		test3();
 		
-		test4();
+//		test4();
+		
+		test5();
+		
+	}
+
+	/**
+	 * 
+	 */
+	private static void test5() {
+		JsonNode missing = objNode.path("missing");
+		
+		System.out.println(missing.isMissingNode());
+		
+		String test = missing.asText();
+		System.out.println("[" + test + "]");
 	}
 
 	/**
