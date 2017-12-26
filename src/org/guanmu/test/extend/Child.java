@@ -6,8 +6,9 @@ package org.guanmu.test.extend;
  * <p>
  * 类描述:测试父类和子类同名属性覆盖和静态相关的问题。
  * 
- * 结论：子类和父类定义了同名同级别的属性，没有明确类限定的情况下，每个类中只会使用本类自身的属性，不涉及属性覆盖。
- * 
+ * 结论：
+ * 	1、子类和父类定义了同名同级别的属性，没有明确类限定的情况下，每个类中只会使用本类自身的属性，不涉及属性覆盖。
+ * 	2、父类定义的静态变量，子类引用的是父类的静态变量本身。
  * <p>
  * 
  * 所属包:org.guanmu.test.extend
@@ -16,9 +17,15 @@ package org.guanmu.test.extend;
  */
 public class Child extends Parent {
 
+	static {
+		extend = "Child-extend";
+	}
+	
 	protected static String lastname = "Child";
 
 	protected String lastnameFild = "Child";	
+	
+	
 	
 	/**
 	 * 
@@ -34,5 +41,9 @@ public class Child extends Parent {
 	public static void main(String[] args) {
 		Child c = new Child();
 		c.print();
+		
+		System.out.println(Parent.extend);
+		System.out.println(Child.extend);
+		
 	}
 }

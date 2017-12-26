@@ -16,6 +16,8 @@ public class Parent {
 	
 	protected String lastnameFild = "Parent";
 	
+	public static String extend = "extend";	
+	
 	/**
 	 * 
 	 */
