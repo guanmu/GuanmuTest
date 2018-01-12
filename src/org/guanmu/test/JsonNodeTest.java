@@ -11,6 +11,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
+import org.guanmu.model.Student;
 
 /**
  * <p>
@@ -103,6 +104,25 @@ public class JsonNodeTest {
 		
 		test5();
 		
+		test6();
+		
+	}
+
+	/**
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonGenerationException 
+	 * 
+	 */
+	private static void test6() throws JsonGenerationException, JsonMappingException, IOException {
+		Student student = new Student("a", 17, "s");
+		
+		
+		System.out.println(mapper.writeValueAsString(student));
+		
+		mapper.configure(DeserializationConfig.Feature.USE_ANNOTATIONS, true);
+
+		System.out.println(mapper.writeValueAsString(student));		
 	}
 
 	/**
